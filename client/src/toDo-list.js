@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './App.css';
 
 const API_URL = 'http://localhost:3001/api/todos';
 
@@ -34,8 +35,9 @@ const TodoList = () => {
     fetchTodos();
   };
 
+  
   return (
-    <div>
+    <div className="container">
       <h1>To-Do List</h1>
       <input
         type="text"
@@ -48,10 +50,7 @@ const TodoList = () => {
         {todos.map((todo) => (
           <li key={todo.id}>
             <span
-              style={{
-                textDecoration: todo.completed ? 'line-through' : 'none',
-                cursor: 'pointer'
-              }}
+              className={todo.completed ? 'completed' : ''}
               onClick={() => updateTodo(todo.id, todo.title, todo.completed)}
             >
               {todo.title}
@@ -62,6 +61,7 @@ const TodoList = () => {
       </ul>
     </div>
   );
+  
 };
 
 export default TodoList;
