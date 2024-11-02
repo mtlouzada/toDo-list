@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import './globals.css';
 
-const API_URL = 'http://localhost:3015/api/todos';
+const BASE_URL = 'http://localhost:3015/api/todos';
 
 interface Todo {
   id: number;
@@ -21,7 +21,7 @@ const TodoList: React.FC = () => {
 
   const fetchTodos = async () => {
     try {
-      const response = await fetch(API_URL);
+      const response = await fetch(`${BASE_URL}/alltask`);
       const data: Todo[] = await response.json();
       setTodos(data);
     } catch (error) {
@@ -32,7 +32,7 @@ const TodoList: React.FC = () => {
   const addTodo = async () => {
     if (newTodo.trim()) {
       try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(`${BASE_URL}/newtask`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const TodoList: React.FC = () => {
 
   const updateTodo = async (id: number, title: string, completed: boolean) => {
     try {
-      await fetch(`${API_URL}/${id}`, {
+      await fetch(`${BASE_URL}/updatetask${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ const TodoList: React.FC = () => {
 
   const deleteTodo = async (id: number) => {
     try {
-      await fetch(`${API_URL}/${id}`, {
+      await fetch(`${BASE_URL}/deletetask${id}`, {
         method: 'DELETE',
       });
       fetchTodos();
