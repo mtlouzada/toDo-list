@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import './globals.css';
 
 const API_URL = 'http://localhost:3015/api/todos';
 
