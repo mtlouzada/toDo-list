@@ -1,13 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const todoRoutes = require('../routers/routers.js');
+const todoRouters = require('../routers/routers.js');
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/api', todoRoutes);
+app.use('/api', todoRouters);
 
 const PORT = 3015;
 app.listen(PORT, () => {
