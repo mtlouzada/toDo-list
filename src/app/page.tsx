@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import './globals.css';
+import { Box, Flex, Input, Button, List, ListItem, Checkbox, Heading } from "@chakra-ui/react";
+
 
 const BASE_URL = 'http://localhost:3015/api/';
 
@@ -76,7 +77,47 @@ const TodoList: React.FC = () => {
   };
 
   return (
-    <div></div>
+    <Flex direction="column" align="center" p={4} maxW="md" mx="auto">
+      <Heading as="h1" size="lg" textAlign="center" mb={4}>
+        To-Do List
+      </Heading>
+      <Flex direction={{ base: "column", md: "row" }} gap={4} w="100%">
+        <Input
+          placeholder="Nova tarefa"
+          size="md"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+        />
+        <Button colorScheme="blue" onClick={addTodo}>
+          Adicionar
+        </Button>
+      </Flex>
+      <List spacing={3} mt={4} w="100%">
+        {todos.map((todo) => (
+          <ListItem
+            key={todo.id}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            p={2}
+            bg="gray.50"
+            rounded="md"
+            shadow="sm"
+          >
+            <Checkbox
+              isChecked={todo.completed}
+              onChange={() => updateTodo(todo.id, todo.title, todo.completed)}
+            >
+              {todo.title}
+            </Checkbox>
+            <Button size="sm" colorScheme="red" onClick={() => deleteTodo(todo.id)}>
+              Excluir
+            </Button>
+          </ListItem>
+        ))}
+      </List>
+    </Flex>
+    
   );
 };
 
